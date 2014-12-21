@@ -1,0 +1,40 @@
+@import "compass";
+@import "modules/all";
+@import "compass/css3/transition";
+//@import "compass/css3/animation"; // need to upgrade
+
+* {
+	padding: 0;
+	margin: 0;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    background: $body-background;
+    font-family: $main-font;
+    font-size: $main-font-size;
+    line-height: $main-line-height;
+    min-height: 100%;
+}
+
+a {
+    color: $link-color;
+    text-decoration: none;
+    @include transition(color 0.3s ease-in-out);
+    
+    &:hover {
+        color: $link-hover-color;
+    }
+}
+
+
+%ui {
+    opacity: 0.8;
+    @include background(linear-gradient(top, $ui-grad-start,$ui-grad-end));
+    border: 1px solid $ui-border-color;
+    border-radius: 2px;
+    color: $ui-color;
+}

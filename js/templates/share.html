@@ -1,0 +1,8 @@
+<i class="fa fa-share"></i>
+<div class="icons">
+    <a href="https://www.facebook.com/sharer.php?u=<%=url%>" class="share-facebook"><i class="fa fa-facebook"></i></a>
+    <a href="https://twitter.com/intent/tweet?text=<%=utitle%>&url=<%=url%>&via=livecontrol" class="share-twitter"><i class="fa fa-twitter"></i></a>
+    <a href="https://plus.google.com/share?url=<%=url%>" class="share-google"><i class="fa fa-google-plus"></i></a>
+    <a href="http://pinterest.com/pin/create/button/?url=<%=url%>&description=<%=utitle%><% if (has_media) { %>&media=<%=guid%><% } %>" class="share-pinterest"><i class="fa fa-pinterest"></i></a>
+    <a href="http://www.tumblr.com/share/photo?&href=<%=url%><% if (has_media) { %>&source=<%=guid%>&caption=<%=utitle%><% } %>" class="share-tumblr"><i class="fa fa-tumblr"></i></a>
+</div>

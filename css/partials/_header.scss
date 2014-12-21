@@ -1,0 +1,178 @@
+.header {
+    @include clearfix;
+    position: fixed;
+    z-index: 1001;
+    top: 15px;
+    right: 15px;
+    width: calc(100% - 30px);
+    
+    font-family: $page-header-font;
+    text-shadow: 1px 1px 1px $header-shadow-color;
+    color: $header-color;
+    @include transition(all 0.5s ease-in-out);
+    
+    .fa-home {
+        font-size: 1.5em;
+    }
+    
+    a.open {
+        float: right;
+        display: none;
+        padding: 7px;
+        
+        span {
+            display: none;
+        }
+    }
+    
+    h1 {
+        font-size: 1.55em;
+        padding: 5px;
+        a {
+            text-decoration: none;
+            
+            &:hover {
+                color: $header-hover-color;
+            }
+        }
+        
+        i {
+            display: none;
+        }
+    }
+    .nav {
+        float: right;
+    }
+    
+    ul {
+        display: inline-block;
+        @extend %ui;
+        border-left: none;
+        
+        li {
+            display: inline-block;
+            border-left: 1px solid $ui-border-color;
+            margin: 0;
+            padding: 0;
+            
+            a {
+                text-align: center;
+                display: block;
+                padding: 10px;
+                text-decoration: none;
+                @include transition(color 0.5s ease-in-out);
+                color: $navigation-color;
+            }
+            
+            &.current a, &:hover a {
+                color: $navigation-hover-color;
+            }
+
+        }
+        
+    }
+    
+    .search {
+        display: inline-block;
+        padding: 5px;
+        
+        &:before {
+            content: '\f002';
+            color: $navigation-color;
+            font-family: $icon-font;
+            font-size: 1.5em;
+        }
+        
+        %search-active {
+            padding: 4px;
+            width: 120px;
+            outline: none;
+            border-bottom: 1px solid $search-border-active;
+        }
+        
+        &:hover {
+            &:before {
+                color: $navigation-hover-color;
+            }
+            input {
+                @extend %search-active;
+            }
+        }
+        
+        input {
+            font-family: $main-font;
+            width: 0px;
+            margin: 5px;
+            background: none;
+            border: none;
+            appearance: none;
+            box-shadow: none;
+            border-radius: none;
+            padding: 4px 0;
+            color: #ccc;
+            
+            border-bottom: 1px solid $search-border;
+            @include transition(width 0.3s ease-in-out);
+
+            &:focus, &.active {
+                @extend %search-active;
+            }
+            
+            @media (max-width: $breakpoint-vsmall) {
+                font-size: 16px;
+            }
+        }
+    }
+
+    
+    &.scrolled {
+        ul, h1 span {
+            display: none;
+        }
+        
+        a.open, h1 i {
+            display: block;
+        }
+    }
+    
+    
+    @media (max-width: $breakpoint-vsmall) {
+        a.open {
+            float: none;
+            display: inline-block;
+            text-align: right;
+        }
+        
+        ul {
+            @include transition(all 0.5s ease-in-out);
+            display: none;
+            
+            li {
+                display: block;
+                a {
+                    text-align: left;
+                }
+            }
+        }
+        
+        h1 {
+            float: left;
+        }
+        
+        .open {
+            ul {
+                display: block;
+                opacity: 1;
+            }
+        }
+        
+        %search-active {
+            width: 80px;
+        }
+        
+        .nav > div {
+            text-align: right;
+        }
+    }
+}
+ 

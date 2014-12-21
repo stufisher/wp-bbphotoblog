@@ -1,0 +1,38 @@
+    <div class="wrap">
+    <div class="image">
+        <div class="container">
+            <div class="comments">
+                <div class="comment_wrap">
+                    <ol></ol>
+                    <div class="form">
+                        <label for="name">Name:</label>
+                        <input name="comment_author" />
+                        
+                        <label for="email">Email:</label>
+                        <input name="comment_author_email" />
+                        
+                        <label for="email">URL:</label>
+                        <input name="comment_author_url" />
+
+                        <textarea name="comment_content"></textarea>
+                        
+                        <a class="submit"><i class="fa fa-spin"></i> Add Comment</a>
+                    </div>
+                </div>
+                <span class="count"></span> <i class="fa fa-2x fa-comments"></i>
+            </div>
+            <div class="details">
+                <h1>
+                    <a href="<%=plink%>"><%=title%></a>
+                    <div class="share"></div>
+                </h1>
+                <% if (terms && terms.category) { %>
+                <span class="cats">
+                    <%=_.map(terms.category, function(t) { return '<a href="/category/categories/'+t.slug+'">'+t.name+'</a>' }).join(' | ') %>
+                </span>
+                <% } %>
+                <%=content%>
+            </div>
+        </div>
+    </div>
+    </div>

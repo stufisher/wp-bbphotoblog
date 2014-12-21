@@ -1,0 +1,329 @@
+/*
+ Posts content
+ */
+.parallax {
+    .wrap {
+        @include transition(opacity 0.3s ease-in-out);
+        opacity: 0;
+    }
+    
+    .image {
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: contain;
+        
+        @media(max-width: $breakpoint-vsmall) {
+            background-attachment: scroll;
+            background-size: cover;
+        }
+        
+        width: 100%;
+    }
+    
+    .share {
+        float: right;
+        
+        .icons {
+            
+        }
+    }
+    
+    .container {
+        width: 100%;
+        overflow: hidden;
+        position: relative;
+    }
+    
+    .details {
+        max-width: 80%;
+        position: absolute;
+        bottom: 2%;
+        left: 2%;
+        background: $post-detail-background;
+        color: $post-detail-color;
+        opacity: 0.8;
+        padding: 1%;
+        font-size: 1.0em;
+        font-family: $content-header-font;
+        
+        a {
+            color: $post-detail-link-color;
+            text-decoration: none;
+            
+            &:hover {
+                color: $post-detail-link-hover;
+            }
+        }
+        
+        .cats {
+            font-size: 0.8em;
+        }
+        
+        h1 {
+            font-family: $page-header-font;
+            font-size: 1.5em;
+            a {
+                color: $post-detail-header-color;
+            }
+            
+        }
+        
+    }
+    
+    .comments {
+        z-index: 1002;
+        position: absolute;
+        right: 2%;
+        bottom: 2%;
+        color: $comments-color;
+        text-align: right;
+        font-size: 1.5em;
+        opacity: 0.7;
+        
+        &.show, &:hover {
+            opacity: 0.9;
+            .comment_wrap {
+                display: block;
+            }
+            
+            i {
+                cursor: pointer;
+            }
+        }
+        
+        .comment_wrap {
+            @include transition(opacity 0.5s ease-in-out 1.5s);
+            width: 250px;
+            //z-index: 2000;
+            display: none;
+            opacity: 1;
+            font-size: 0.6em;
+            
+            @media (max-width: $breakpoint-vsmall) {
+                margin-right: 40px;
+                margin-bottom: 30px;
+            }
+            
+            ol {
+                overflow: scroll;
+                
+                li {
+                    @extend %ui;
+                    opacity: 1;
+                    padding: 5px;
+                    text-align: left;
+                    margin-bottom: 2px;
+                    //opacity: 0.9;
+                    
+                    span.date {
+                        float: right;
+                    }
+                    
+                    a {
+                        text-decoration: none;
+                        color: $comment-link-color;
+                        &:hover {
+                            color: $comment-link-hover;
+                        }
+                    }
+                }
+            }
+            
+            .form {
+                span.errormessage, .ferror {
+                    color: $form-error-color;
+                }
+                
+                @extend %ui;
+                opacity: 1;
+                text-align: left;
+                padding: 5px;
+                
+                label, input {
+                    text-align: left;
+                    display: block;
+                }
+                
+                input, textarea {
+                    width: calc(100% - 3px);
+                    padding: 3px;
+                }
+                
+                textarea {
+                    height: 100px
+                }
+                
+                input {
+                    margin-bottom: 2px;
+                }
+                
+                a.submit {
+                    @extend %ui;
+                    margin-top: 3px;
+                    display: block;
+                    opacity: 1;
+                    padding: 5px;
+                    
+                    &:hover {
+                        color: $link-hover-color;
+                        @include background(linear-gradient(top, #222,#333));
+                    }
+                }
+                
+                @media (max-width: $breakpoint-vsmall) {
+                    input, textarea {
+                        font-size: 16px;
+                    }
+                }
+            }
+        }
+    }
+    
+    .curtain {
+        background-color: #000;
+        
+        .image {
+            height: 50%;
+        }
+    }
+    
+}
+
+
+/*
+ Navigation Arrows
+*/
+.navigation {
+    display: none;
+    
+    @extend %ui;
+    padding: 5px;
+    color: $navigation-color;
+    
+    position: fixed;
+    z-index: 999;
+    right: 0;
+    top: 50%;
+    transform: translate(0, -50%);
+    font-size: 3em;
+    opacity: 0.8;
+
+    div div {
+        margin: 1px;
+        
+        &:hover {
+            cursor: pointer;
+            color: $navigation-hover-color;
+        }
+    }
+
+}
+
+
+
+.anim1 {
+    .image {
+        -skrollr-animation-name:anim1;
+    }
+    
+    .details {
+        -skrollr-animation-name:anim1d;
+    }
+    .comments {
+        -skrollr-animation-name:anim1c;
+    }
+}
+
+
+.anim2 {
+    .image {
+        -skrollr-animation-name:anim2;
+    }
+    
+    .details {
+        -skrollr-animation-name:anim1d;
+    }
+    .comments {
+        -skrollr-animation-name:anim1c;
+    }
+}
+
+.anim3 {
+    .image {
+        -skrollr-animation-name:anim3;
+    }
+    
+    .details {
+        -skrollr-animation-name:anim1d;
+    }
+    .comments {
+        -skrollr-animation-name:anim1c;
+    }
+}
+
+$image-dim: 0.3;
+
+@-skrollr-keyframes anim1 {
+    center {
+        background-position: 50% 0px;
+        opacity: 1;
+    }
+    top-bottom {
+        background-position: 50% -100px;
+        opacity: $image-dim;
+    }
+    bottom-top {
+        background-position: 50% 300px;
+        opacity: $image-dim;
+    }
+}
+
+@-skrollr-keyframes anim2 {
+    center {
+        background-position: 50% 0px;
+        opacity: 1;
+    }
+    top-bottom {
+        background-position: 50% -200px;
+        opacity: $image-dim;
+    }
+    
+    bottom-top {
+        background-position: 50% 200px;
+        opacity: $image-dim;
+    }
+}
+
+
+@-skrollr-keyframes anim3 {
+    center {
+        opacity: 1;
+    }
+    bottom-top {
+        opacity: $image-dim;
+    }
+    top-bottom {
+        opacity: $image-dim;
+    }
+}
+
+@-skrollr-keyframes anim1d {
+    center {
+        opacity: 0.7;
+    }
+    
+    top {
+        opacity: 0;
+    }
+}
+
+@-skrollr-keyframes anim1c {
+    center {
+        opacity: 0.9;
+    }
+    
+    top {
+        opacity: 0;
+    }
+}

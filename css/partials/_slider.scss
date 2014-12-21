@@ -1,0 +1,68 @@
+/*
+ Image Slider
+*/
+.slider_wrap {
+    width: 100%;
+    overflow: hidden;
+    margin-bottom: 10px;
+    background: #000;
+    
+    .anim {
+        -webkit-animation-timing-function: linear;
+        -webkit-animation: progress 30s infinite;
+        background: #444;
+        height: 10px;
+    }
+    
+    &:hover .anim, &:hover .slider {
+        -webkit-animation-play-state: paused;
+    }
+}
+
+
+.slider {
+    
+    -webkit-animation: slider 30s infinite;
+    @include transition(margin-left, 0.3s, cubic-bezier);
+    width: 300%;
+    //height: 250px;
+    position: relative;
+    margin-left: -0%;
+    //margin-bottom: 10px;
+    
+    figure {
+        display: inline-block;
+        width: 1/12 * 100%;
+        
+        .img {
+            height: 80%;
+            @include transition(opacity, 0.2s ease-in-out);
+            background-size: cover;
+            
+            &:hover {
+                opacity: 0.7;
+            }
+            
+            a {
+                display: block;
+                width: 100%;
+                height: 100%;
+            }
+        }
+        
+        figcaption {
+            padding: 3px;
+            display: block;
+            background: $slider-caption-background;
+            height: 20%;
+            overflow: hidden;
+            font-size: 1em;
+            
+            h1 {
+                border: none;
+                margin: 2px 0;
+                font-size: 1.2em;
+            }
+        }
+    }
+}
