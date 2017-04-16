@@ -28,6 +28,7 @@ define(['marionette', 'collections/pages', 'collections/taxonomies', 'views/page
             var slug = path.split('/').pop();
             app.single({
                 'filter[orderby]': 'rand',
+                // 'orderby': 'rand',
             })
             console.log('loading page', slug)
 
@@ -72,6 +73,7 @@ define(['marionette', 'collections/pages', 'collections/taxonomies', 'views/page
             console.log('archives')
             app.single({
                 'filter[orderby]': 'rand',
+                // 'orderby': 'rand',
             })
 
             var pages = new Pages()
@@ -91,6 +93,7 @@ define(['marionette', 'collections/pages', 'collections/taxonomies', 'views/page
             console.log('Develop')
             app.single({
                 'filter[orderby]': 'rand',
+                // 'orderby': 'rand',
             })
             
             var pages = new Pages()

@@ -77,6 +77,7 @@ define(['marionette', 'collections/posts', 'collections/taxonomies', 'tpl!templa
             this.$el.find('i.fa-refresh').addClass('fa-spin')
             var self = this
             this.thumbnails.fetch({ data: { 'filter[orderby]': 'rand' } }).done(function() {
+            // this.thumbnails.fetch({ data: { 'orderby': 'rand' } }).done(function() {
                 self.$el.find('i.fa-refresh').removeClass('fa-spin')
             })
         },
