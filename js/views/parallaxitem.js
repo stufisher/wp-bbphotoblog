@@ -15,10 +15,10 @@ define(['marionette', 'backbone', 'models/comment', 'collections/comments', 'vie
         },
         
         ui: {
-            'name': 'input[name=comment_author]',
-            'email': 'input[name=comment_author_email]',
-            'url': 'input[name=comment_author_url]',
-            'comment': 'textarea[name=comment_content]',
+            'name': 'input[name=author_name]',
+            'email': 'input[name=author_email]',
+            'url': 'input[name=author_url]',
+            'comment': 'textarea[name=content]',
         },
         
         events: {
@@ -40,7 +40,7 @@ define(['marionette', 'backbone', 'models/comment', 'collections/comments', 'vie
         initialize: function(options) {
             var self = this
             this.className.bind(this)
-            this.collection = new Comments([], { post: this.model.get('ID') })
+            this.collection = new Comments([], { post: this.model.get('id') })
             this.collection.fetch()
             
             _.extend(Comment.prototype, Backbone.Validation.mixin)
@@ -52,8 +52,7 @@ define(['marionette', 'backbone', 'models/comment', 'collections/comments', 'vie
         
         newComment: function() {
             this.comment = new Comment({
-                comment_post_ID: this.model.get('ID'),
-                post: this.model.get('ID'),
+                post: this.model.get('id'),
             })
         },
         
@@ -67,6 +66,7 @@ define(['marionette', 'backbone', 'models/comment', 'collections/comments', 'vie
             var val = $(e.target).val()
             
             var error = this.comment.preValidate(attr, val)
+            console.log('validate', attr, val, error)
             if (error) this.invalid(e.target, error)
             else this.valid(e.target)
         },
@@ -87,10 +87,10 @@ define(['marionette', 'backbone', 'models/comment', 'collections/comments', 'vie
             console.log('name', this.ui.name.val())
             
             this.comment.set({
-                comment_author: this.ui.name.val(),
-                comment_author_email: this.ui.email.val(),
-                comment_author_url: this.ui.url.val(),
-                comment_content: this.ui.comment.val(),
+                author_name: this.ui.name.val(),
+                author_email: this.ui.email.val(),
+                author_url: this.ui.url.val(),
+                content: this.ui.comment.val(),
             })
             
             var valid = this.comment.isValid(true);
@@ -136,12 +136,14 @@ define(['marionette', 'backbone', 'models/comment', 'collections/comments', 'vie
             //this.$el.find('.curtain').height($(window).height()*0.5)
             this.$el.find('.comments ol').css('max-height', h*(app.mobile() ? 0.28 : 0.4))
             
+            var fi = this.model.get('_embedded')['wp:featuredmedia'][0]
+
             if (app.mobile()) {
-                if ('mobile' in this.model.get('featured_image').attachment_meta.sizes) var img = this.model.get('featured_image').attachment_meta.sizes.mobile.url
-                else if ('medium' in this.model.get('featured_image').attachment_meta.sizes) var img = this.model.get('featured_image').attachment_meta.sizes.medium.url
-                else var img = this.model.get('featured_image').guid
+                if ('mobile' in fi.media_details.sizes) var img = fi.media_details.sizes.mobile.source_url
+                else if ('medium' in fi.media_details.sizes.sizes) var img = fi.media_details.sizes.medium.source_url
+                else var img = fi.source_url
                 
-            } else var img = this.model.get('featured_image').guid
+            } else var img = fi.source_url
 
             this.$el.find('.image').css('background-image', 'url('+img+')')            
             var self = this

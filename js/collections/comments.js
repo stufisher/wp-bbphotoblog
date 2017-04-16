@@ -4,7 +4,7 @@ define(['underscore', 'backbone.paginator', 'models/comment'], function(_, Pagea
         model: Comment,
         mode: 'infinite',
         url: function() {
-            return 'http://stu-fisher.org/wp-json/posts/'+this.post+'/comments/'
+            return 'http://stu-fisher.org/wp-json/wp/v2/comments?post='+this.post
         },
         
         initialize: function(models, options) {
@@ -15,14 +15,5 @@ define(['underscore', 'backbone.paginator', 'models/comment'], function(_, Pagea
         state: {
             pageSize: 10,
         },
-            
-        /*queryParams: {
-        pageSize: 'filter[posts_per_page]',
-        },*/
-            
-        parseLinks: function (r,xhr) {
-            return { next: this.url }
-        },
-        
     })
 })

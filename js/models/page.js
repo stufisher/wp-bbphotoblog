@@ -1,7 +1,7 @@
 define(['backbone'], function(Backbone) {
 
   return Backbone.Model.extend({
-    idAttribute: 'ID',
+    idAttribute: 'id',
       
     defaults: {
         plink: '',

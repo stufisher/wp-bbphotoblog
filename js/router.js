@@ -2,9 +2,10 @@ define(['marionette', 'controller'], function(Marionette, c) {
   var Router = Marionette.AppRouter.extend({
     appRoutes: {
       '': 'home',
-      'category/categories/:cat': 'archive',
-      'category/categories/:cat/': 'archive',
+      'categories/category/:cat': 'archive',
+      'categories/category/:cat/': 'archive',
       'develop': 'develop',
+      'develop/': 'develop',
       'photos': 'archives',
       'photos/': 'archives',
       

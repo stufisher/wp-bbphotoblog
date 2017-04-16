@@ -1,7 +1,7 @@
 define(['marionette'], function(Marionette) {
 
     var HeaderItemView = Marionette.ItemView.extend({
-        template: _.template('<a href="/<%=slug%>"><%=title%></a>'),
+        template: _.template('<a href="/<%=slug%>"><%=title.rendered%></a>'),
         tagName: 'li',
         events: { 'click': 'select' },
         
@@ -58,8 +58,8 @@ define(['marionette'], function(Marionette) {
                 
                 app.trigger('inner:close')
                 app.multiple({
-                    'filter[s]': v,
-                    'filter[orderby]': 'date',
+                    'search': v,
+                    'orderby': 'date',
                 })
             }
             

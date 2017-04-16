@@ -3,40 +3,40 @@ define(['backbone'], function(Backbone) {
   Backbone.emulateHTTP = true;
     
   return Backbone.Model.extend({
-    idAttribute: 'ID',
+    idAttribute: 'id',
       
     defaults: {
         url: '',
     },
       
     validation: {
-        comment_author_email: {
+        author_email: {
             required: true,
             pattern: 'email'
         },
       
-        comment_author_url: {
+        author_url: {
             required: false,
             pattern: 'url',
         },
       
-        comment_author: {
+        author_name: {
             required: true,
         },
       
-        comment_content: {
+        content: {
             required: true,
         },
       
-        comment_post_ID: {
+        post: {
             required: true,
         },
       
     },
       
     urlRoot: function() {
-        var id = this.get('ID') || ''
-        return 'http://stu-fisher.org/wp-json/posts/'+this.get('post')+'/comments'+(id ? '/'+id : '')
+        var id = this.get('id') || ''
+        return 'http://stu-fisher.org/wp-json/wp/v2/comments'+(id ? '/'+id : '')+'?post='+this.get('post')
     }
   })
        

@@ -1,14 +1,14 @@
 
     <cite>
         <span class="author">
-            <% if (author.URL) { %>
-                <a href="<%=author.URL%>" rel="external nofollow" class="url"><%=author.name%></a>
+            <% if (author_url) { %>
+                <a href="<%=author_url%>" rel="external nofollow" class="url"><%=author_name%></a>
             <% } else { %>
-                <%=author.name%>
+                <%=author_name%>
             <% } %>
         </span>
         <span class="date"><%=(new Date(date)).toDateString()%></span>
     </cite>
     <div class="content">
-        <%=content%>
+        <%=content.rendered%>
     </div>

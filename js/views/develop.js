@@ -12,8 +12,9 @@ define(['marionette',
         template: itemtemplate,
         
         onRender: function() {
-            var f = this.model.get('featured_image')
-            if (f) this.$el.find('.img').css('background-image', 'url('+f.guid+')')
+            // var f = this.model.get('featured_image')
+            var f = this.model.get('_embedded')['wp:featuredmedia'][0]
+            if (f) this.$el.find('.img').css('background-image', 'url('+f.source_url+')')
         },
     })
     
@@ -42,12 +43,17 @@ define(['marionette',
         },
         
         initialize: function(options) {
-            var children = app.pages.filter(function(m) { var p = m.get('parent'); if (p && p.slug == 'develop') return m })
-            this.collection = new Pages(children)
-            //console.log(this.collection, children)
+            this.collection = new Pages()
+            this.collection.queryParams.parent = 277
+            this.collection.queryParams._embed = 1
+            this.fetched = this.collection.fetch()
         },
         
         onDomRefresh: function(){
+            this.fetched.done(this.doOnDomRefresh.bind(this))
+        },
+
+        doOnDomRefresh: function() {
             var viewport = app.mobile() ? 1 : 4;
             var len = this.collection.length + viewport
             var figw = 100/len

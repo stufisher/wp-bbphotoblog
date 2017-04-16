@@ -2,11 +2,11 @@ define(['marionette', 'collections/posts', 'collections/taxonomies', 'tpl!templa
 
     var ArchivesItemView = Marionette.ItemView.extend({
         tagName: 'li',
-        template: _.template('<a href="<%=plink%>"><img src="<%=featured_image.attachment_meta.sizes[\'square-small\'].url%>" alt="<%=title%>" /></a>'),
+        template: _.template('<a href="<%=plink%>"><img src="<%=_embedded[\'wp:featuredmedia\'][0].media_details.sizes[\'square-small\'].source_url%>" alt="<%=title%>" /></a>'),
         
         onRender: function() {
             var self = this
-            require(['image!'+this.model.get('featured_image').attachment_meta.sizes['square-small'].url], function() {
+            require(['image!'+this.model.get('_embedded')['wp:featuredmedia'][0].media_details.sizes['square-small'].source_url], function() {
                 self.$el.css('opacity', 1)
             })
         },

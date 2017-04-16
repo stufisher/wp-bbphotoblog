@@ -37,11 +37,13 @@ define(['marionette', 'collections/pages', 'collections/posts', 'collections/hea
     
     app.addInitializer(function() {
         app.posts = new Posts()
-        app.pages = new Pages()
-        
-        var fetch = app.pages.fetch().done(function() {
-            console.log('pages', app.pages.where({ parent: 0 }))
-            app.header.show(new HeaderView({collection: new HeaderItems(app.pages.where({parent: 0}))}))
+
+        var pages = new Pages()
+        pages.queryParams.parent = 0
+
+        var fetch = pages.fetch().done(function() {
+            console.log('pages', pages)
+            app.header.show(new HeaderView({collection: new HeaderItems(pages.toJSON())}))
         })
         
         app.content.show(new ParallaxView({ collection: app.posts }))
@@ -84,7 +86,8 @@ define(['marionette', 'collections/pages', 'collections/posts', 'collections/hea
         setTimeout(function() {
             if (app.posts.length) app.posts.fullCollection.reset()
             app.posts.state.pageSize = 1
-            app.posts.queryParams['filter[category_name]'] = ''
+            delete app.posts.queryParams['categories']
+            delete app.posts.queryParams['slug']
             _.extend(app.posts.queryParams, options)
             app.posts.fetch({ cache: false }).done(function() {
                 if (options.callback) options.callback()
@@ -101,7 +104,8 @@ define(['marionette', 'collections/pages', 'collections/posts', 'collections/hea
             app.posts.fullCollection.reset()
             app.posts.state.currentPage = 1
             app.posts.state.pageSize = 5
-            app.posts.queryParams['filter[category_name]'] = ''
+            delete app.posts.queryParams['categories']
+            delete app.posts.queryParams['slug']
             _.extend(app.posts.queryParams, options)
             app.posts.fetch({ reset: true }).done(function() {
                 if (options.callback) options.callback()

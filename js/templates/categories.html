@@ -1,20 +1,20 @@
 <select name="categories">
     <option value=""> - Categories - </option>
-<% _.each(_.filter(items, function(e) { return e['parent'] ? e['parent']['ID'] ==  8 : false }), function(i) { %>
+<% _.each(_.filter(items, function(e) { return e['parent'] ? e['parent'] ==  8 : false }), function(i) { %>
     <option value="<%=i.slug%>"><%=i.name%></option>
 <% }) %>
 </select>
 
 <select name="places">
     <option value=""> - Places - </option>
-    <% _.each(_.filter(items, function(e) { return e['parent'] ? e['parent']['ID'] ==  9 : false }), function(i) { %>
+    <% _.each(_.filter(items, function(e) { return e['parent'] ? e['parent'] ==  9 : false }), function(i) { %>
     <option value="<%=i.slug%>"><%=i.name%></option>
     <% }) %>
 </select>
 
 <select name="type">
     <option value=""> - Type - </option>
-    <% _.each(_.filter(items, function(e) { return e['parent'] ? e['parent']['ID'] ==  17 : false }), function(i) { %>
+    <% _.each(_.filter(items, function(e) { return e['parent'] ? e['parent'] ==  17 : false }), function(i) { %>
     <option value="<%=i.slug%>"><%=i.name%></option>
     <% }) %>
 </select>

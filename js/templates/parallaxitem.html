@@ -6,32 +6,32 @@
                     <ol></ol>
                     <div class="form">
                         <label for="name">Name:</label>
-                        <input name="comment_author" />
+                        <input name="author_name" />
                         
                         <label for="email">Email:</label>
-                        <input name="comment_author_email" />
+                        <input name="author_email" />
                         
                         <label for="email">URL:</label>
-                        <input name="comment_author_url" />
+                        <input name="author_url" />
 
-                        <textarea name="comment_content"></textarea>
+                        <textarea name="content"></textarea>
                         
-                        <a class="submit"><i class="fa fa-spin"></i> Add Comment</a>
+                        <a class="submit" href="#"><i class="fa fa-spin"></i> Add Comment</a>
                     </div>
                 </div>
                 <span class="count"></span> <i class="fa fa-2x fa-comments"></i>
             </div>
             <div class="details">
                 <h1>
-                    <a href="<%=plink%>"><%=title%></a>
+                    <a href="<%=plink%>"><%=title.rendered%></a>
                     <div class="share"></div>
                 </h1>
-                <% if (terms && terms.category) { %>
+                <% if (_embedded['wp:term'][0]) { %>
                 <span class="cats">
-                    <%=_.map(terms.category, function(t) { return '<a href="/category/categories/'+t.slug+'">'+t.name+'</a>' }).join(' | ') %>
+                    <%=_.map(_embedded['wp:term'][0], function(t) { return '<a href="/category/categories/'+t.slug+'">'+t.name+'</a>' }).join(' | ') %>
                 </span>
                 <% } %>
-                <%=content%>
+                <%=content.rendered%>
             </div>
         </div>
     </div>

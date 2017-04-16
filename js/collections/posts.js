@@ -3,27 +3,10 @@ define(['underscore', 'backbone.paginator', 'models/post'], function(_, Pageable
     return PageableCollection.extend({
         model: Post,
         mode: 'infinite',
-        url: 'http://stu-fisher.org/wp-json/posts',
+        url: 'http://stu-fisher.org/wp-json/wp/v2/posts?_embed=1',
             
         state: {
             pageSize: 5,
         },
-            
-        queryParams: {
-            pageSize: 'filter[posts_per_page]',
-        },
-        
-        parseLinks: function (r,xhr) {
-            console.log(r, xhr)
-            //return r.length ? { next: this.url } : {}
-            return { next: this.url }
-        },
-        
-        /*parseState: function(r, q, state, options) {
-            return { totalRecords: 188 }
-            //return { totalRecords: options.xhr.getResponseHeader('X-WP-Total') }
-        },*/
-        
-        
     })
 })

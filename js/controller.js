@@ -1,4 +1,4 @@
-define(['marionette', 'views/page', 'views/archives', 'views/develop'], function(Marionette, PageView, ArchivesView, DevelopView) {
+define(['marionette', 'collections/pages', 'collections/taxonomies', 'views/page', 'views/archives', 'views/develop'], function(Marionette, Pages, Taxonomies, PageView, ArchivesView, DevelopView) {
     
     var controller = {
         /* 
@@ -10,7 +10,7 @@ define(['marionette', 'views/page', 'views/archives', 'views/develop'], function
             app.trigger('inner:close', true)
             //app.content.$el.addClass('loading loading-holder')
             app.multiple({
-                'filter[orderby]': 'date',
+                'orderby': 'date',
                 callback: function() {
                     //require(app.posts.map(function(e) { return 'image!'+e.get('featured_image').guid }), function() {
                         //app.content.$el.removeClass('loading loading-holder')
@@ -30,7 +30,12 @@ define(['marionette', 'views/page', 'views/archives', 'views/develop'], function
                 'filter[orderby]': 'rand',
             })
             console.log('loading page', slug)
-            app.inner.show(new PageView({ model: app.pages.findWhere({ slug: slug }) }))
+
+            var pages = new Pages()
+            pages.queryParams.slug = slug
+            pages.fetch().done(function() {
+                app.inner.show(new PageView({ model: pages.at(0) }))
+            })
             app.side.empty()
         },
 
@@ -42,7 +47,7 @@ define(['marionette', 'views/page', 'views/archives', 'views/develop'], function
             app.trigger('header:unselect')
             console.log('single post', y,m,d,slug)
             app.single({
-                'filter[name]': slug,
+                'slug': slug,
             })
             app.inner.empty()
         },
@@ -52,8 +57,11 @@ define(['marionette', 'views/page', 'views/archives', 'views/develop'], function
          An archive based on category, year, month, etc
         */
         archive: function(category) {
-            app.multiple({ 'filter[category_name]': category, callback: function() { app.inner.empty() } })
-            //app.trigger('title', category)
+            var categories = new Taxonomies()
+            categories.queryParams.slug = category
+            categories.fetch().done(function() {
+                app.multiple({ 'categories': categories.at(0).get('id'), callback: function() { app.inner.empty() } })
+            })
             console.log('single archive')
         },
         
@@ -65,7 +73,13 @@ define(['marionette', 'views/page', 'views/archives', 'views/develop'], function
             app.single({
                 'filter[orderby]': 'rand',
             })
-            app.inner.show(new PageView({ side: true, className: 'inner left', model: app.pages.findWhere({ slug: 'photos' }) }))
+
+            var pages = new Pages()
+            pages.queryParams.slug = 'photos'
+            pages.fetch().done(function() {
+                app.inner.show(new PageView({ side: true, className: 'inner left', model: pages.at(0) }))
+            })
+
             app.side.show(new ArchivesView())
         },
         
@@ -79,7 +93,13 @@ define(['marionette', 'views/page', 'views/archives', 'views/develop'], function
                 'filter[orderby]': 'rand',
             })
             
-            app.inner.show(new DevelopView({ model: app.pages.findWhere({ slug: 'develop' }) }))
+            var pages = new Pages()
+            pages.queryParams.slug = 'develop'
+            pages.fetch().done(function() {
+                app.inner.show(new DevelopView({ model: pages.at(0) }))
+            })
+
+            
             app.side.empty()
         },
     }
