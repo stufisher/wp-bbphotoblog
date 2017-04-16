@@ -28,7 +28,7 @@
                 </h1>
                 <% if (_embedded['wp:term'][0]) { %>
                 <span class="cats">
-                    <%=_.map(_embedded['wp:term'][0], function(t) { return '<a href="/category/categories/'+t.slug+'">'+t.name+'</a>' }).join(' | ') %>
+                    <%=_.map(_embedded['wp:term'][0], function(t) { return '<a href="/categories/category/'+t.slug+'">'+t.name+'</a>' }).join(' | ') %>
                 </span>
                 <% } %>
                 <%=content.rendered%>
